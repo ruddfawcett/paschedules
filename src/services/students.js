@@ -1,5 +1,6 @@
 const service = require('feathers-mongoose');
 const Student = require('../models/student');
+const studentHooks = require('../hooks/students');
 
 module.exports = function() {
   const app = this;
@@ -13,5 +14,7 @@ module.exports = function() {
   };
 
   // Initialize our service with any options it requires
-  app.use('/students', service(options));
+  app.use('students', service(options));
+  app.service('students').before(studentHooks.before);
+  app.service('students').after(studentHooks.after);
 };
