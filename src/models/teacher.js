@@ -2,10 +2,15 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TeacherSchema = new Schema({
-  name: { type: String, required: true },
-  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
-  created_at: { type: Date, 'default': Date.now },
-  updated_at: { type: Date, 'default': Date.now }
+  verified: { type: Boolean, default: false },
+  name: {
+    first: { type: String, required: true },
+    last: { type: String, required:  true}
+  },
+  email: { type: String, required: false, lowercase: true, unique: true },
+  password: { type: String, required: false },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now }
 });
 
 TeacherSchema.pre('save', function(next) {

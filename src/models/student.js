@@ -2,11 +2,17 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const StudentSchema = new Schema({
-  name: { type: String, required: true },
+  verified: { type: Boolean, default: false },
+  name: {
+    first: { type: String, required: true },
+    last: { type: String, required:  true}
+  },
+  year: { type: Number, required: true },
   email: { type: String, required: true, lowercase: true, unique: true },
-  courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
-  created_at: { type: Date, 'default': Date.now },
-  updated_at: { type: Date, 'default': Date.now }
+  ical: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  created_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now }
 });
 
 StudentSchema.pre('save', function(next) {
