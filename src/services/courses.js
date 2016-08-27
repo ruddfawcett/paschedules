@@ -17,5 +17,5 @@ module.exports = function() {
   app.use('courses', service(options));
   app.service('courses').before({
     all: hooks.disable('external')
-  }));
+  });
 };

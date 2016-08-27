@@ -17,5 +17,5 @@ module.exports = function() {
   app.use('tokens', service(options));
   app.service('tokens').before({
     all: hooks.disable('external')
-  }));
+  });
 };

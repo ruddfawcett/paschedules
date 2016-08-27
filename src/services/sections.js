@@ -17,5 +17,5 @@ module.exports = function() {
   app.use('sections', service(options));
   app.service('sections').before({
     all: hooks.disable('external')
-  }));
+  });
 };
