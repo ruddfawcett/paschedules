@@ -18,8 +18,7 @@ exports.before = {
     auth.restrictToOwner({ ownerField: '_id' })
   ],
   create: [
-    auth.hashPassword(),
-    verify.email()
+    auth.hashPassword()
   ],
   update: [
     auth.verifyToken(),
@@ -42,10 +41,14 @@ exports.before = {
 };
 
 exports.after = {
-  all: [hooks.remove('password')],
+  all: [
+    hooks.remove('password')
+  ],
   find: [],
   get: [],
-  create: [],
+  create: [
+    verify.email()
+  ],
   update: [],
   patch: [],
   remove: []
