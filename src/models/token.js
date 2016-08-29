@@ -8,7 +8,7 @@ const TokenSchema = new Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-TokenSchema.pre('save', function(next) {
+TokenSchema.pre('save', (next) => {
   this.updated_at = new Date();
   next();
 });

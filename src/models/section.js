@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const SectionSchema = new Schema({
   code: { type: String, required: true },
-  teacher: { type: Schema.Types.ObjectId, ref: 'Teacher' },
-  room: { type: String, required: true },
+  number: { type: Number, required: true },
+  room: { type: String, required: false },
   students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
   meets: [{
     day: { type: Number },
@@ -15,7 +15,7 @@ const SectionSchema = new Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-SectionSchema.pre('save', function(next) {
+SectionSchema.pre('save', (next) => {
   this.updated_at = new Date();
   next();
 });

@@ -8,16 +8,20 @@ const StudentSchema = new Schema({
     last: { type: String, required:  true}
   },
   year: { type: Number, required: true },
-  email: { type: String, required: true, lowercase: true, unique: true },
+  username: { type: String, required: true, lowercase: true, unique: true },
   ical: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });
 
-StudentSchema.pre('save', function(next) {
+StudentSchema.pre('save', (next) => {
   this.updated_at = new Date();
   next();
+});
+
+StudentSchema.virtual('email').get(() => {
+  return this.username + '@andover.edu';
 });
 
 const StudentModel = mongoose.model('Student', StudentSchema);
