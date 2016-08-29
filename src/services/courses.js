@@ -15,7 +15,17 @@ module.exports = function() {
 
   // Initialize our service with any options it requires
   app.use('courses', service(options));
+
+  let createSlug = function(options) {
+    return function(hook) {
+      hook.data.slug = hook.data.title.toLowerCase().replace(/ /g, '-').replace(':', '');
+    }
+  }
+
   app.service('courses').before({
-    all: hooks.disable('external')
+    all: hooks.disable('external'),
+    create: [
+      createSlug()
+    ]
   });
 };
