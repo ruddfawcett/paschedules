@@ -45,6 +45,7 @@ var self = module.exports = {
       }
       else {
         courses[code] = {
+          teacher: data.section.teacher,
           course: {
             title: data.course.title,
             code: data.course.code,
@@ -52,8 +53,8 @@ var self = module.exports = {
             term: data.course.term
           },
           section: {
-            teacher: data.section.teacher,
             number: data.section.number,
+            room: data.section.room,
             meets: []
           }
         };

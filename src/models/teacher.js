@@ -4,13 +4,12 @@ const Schema = mongoose.Schema;
 const TeacherSchema = new Schema({
   verified: { type: Boolean, default: false },
   name: {
-    first: { type: String, required: true },
-    last: { type: String, required:  true}
+    first: { type: String, required: false },
+    last: { type: String, required:  false}
   },
-  username: { type: String, required: false, lowercase: true, unique: true },
-  sections: [{ type: Schema.Types.ObjectId, ref: 'Section' }],
+  username: { type: String, required: false, lowercase: true },
   password: { type: String, required: false },
-  ical: { type: String, required: false, unique: true },
+  ical: { type: String, required: false },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });

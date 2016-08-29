@@ -5,11 +5,12 @@ const SectionSchema = new Schema({
   code: { type: String, required: true },
   number: { type: Number, required: true },
   room: { type: String, required: false },
+  teacher: { type: Schema.Types.ObjectId, ref: 'Teacher', required: false },
   students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
   meets: [{
-    day: { type: Number },
-    starts: { type: Date },
-    ends: { type: Date }
+    day: { type: Number, required: true },
+    start: { type: Date, required: true },
+    end: { type: Date, required: true }
   }],
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }

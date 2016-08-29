@@ -47,7 +47,7 @@ var self = module.exports = {
     return {
       code: parts[0],
       number: parseInt(number[2]) || 0,
-      room: room,
+      room: room || null,
       teacher: teacher
     }
   },
