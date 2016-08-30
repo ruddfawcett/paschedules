@@ -7,8 +7,6 @@ const ical = require('ical');
 const users = app.service('/api/users');
 
 server.on('listening', () => {
-  testCal();
-
   console.log(`Timetable is live on ${app.get('host')}:${port}.`)
 });
 
