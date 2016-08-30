@@ -6,7 +6,7 @@ module.exports =  {
       if (!hook.result.username) {
         return;
       }
-      const tokens = hook.app.service('tokens');
+      const tokens = hook.app.service('/api/tokens');
 
       tokens.create({ target: hook.result._id}).then((result) => {
         if (result) {

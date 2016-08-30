@@ -13,7 +13,7 @@ module.exports = function() {
     }
   };
 
-  app.use('courses', service(options));
+  app.use('/api/courses', service(options));
 
   let createSlug = function(options) {
     return function(hook) {
@@ -21,16 +21,16 @@ module.exports = function() {
     }
   }
 
-  app.service('courses').before({
+  app.service('/api/courses').before({
     all: hooks.disable('external'),
     create: [
       createSlug()
     ]
   });
-  app.service('courses').after({
+  app.service('/api/courses').after({
     find: [
       hooks.populate('sections', {
-        service: 'sections'
+        service: '/api/sections'
       })
     ]
   });

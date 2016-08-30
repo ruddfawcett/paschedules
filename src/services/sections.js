@@ -13,14 +13,14 @@ module.exports = function() {
     }
   };
 
-  app.use('sections', service(options));
-  app.service('sections').before({
+  app.use('/api/sections', service(options));
+  app.service('/api/sections').before({
     all: hooks.disable('external')
   });
-  app.service('sections').after({
+  app.service('/api/sections').after({
     get: [
       hooks.populate('teacher', {
-        service: 'users'
+        service: '/api/users'
       })
     ]
   });

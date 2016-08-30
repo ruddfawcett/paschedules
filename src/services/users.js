@@ -13,7 +13,7 @@ module.exports = function() {
     }
   };
 
-  app.use('users', service(options));
-  app.service('users').before(hooks.before);
-  app.service('users').after(hooks.after);
+  app.use('/api/users', service(options));
+  app.service('/api/users').before(hooks.before);
+  app.service('/api/users').after(hooks.after);
 };

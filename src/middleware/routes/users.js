@@ -1,7 +1,7 @@
 const router = require('feathers').Router();
 
 module.exports = function(app) {
-  const users = app.service('users');
+  const users = app.service('/api/users');
 
   router.get('/:username', (req, res, next) => {
     users.find({ query: { username: req.params.username } }).then((result) => {

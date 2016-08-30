@@ -4,9 +4,9 @@ const Q = require('q');
 const app = require('../app');
 const mongoose = require('mongoose');
 
-const courses = app.service('courses');
-const sections = app.service('sections');
-const users = app.service('users');
+const courses = app.service('/api/courses');
+const sections = app.service('/api/sections');
+const users = app.service('/api/users');
 
 var self = module.exports = {
   import: (data) => {

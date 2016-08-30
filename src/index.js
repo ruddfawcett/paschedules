@@ -4,7 +4,7 @@ const server = app.listen(port);
 
 const importer = require('./modules/importer');
 const ical = require('ical');
-const users = app.service('users');
+const users = app.service('/api/users');
 
 server.on('listening', () => {
   testCal();

@@ -12,9 +12,9 @@ module.exports = function() {
       max: 25
     }
   };
-  
-  app.use('tokens', service(options));
-  app.service('tokens').before({
+
+  app.use('/api/tokens', service(options));
+  app.service('/api/tokens').before({
     all: hooks.disable('external')
   });
 };
