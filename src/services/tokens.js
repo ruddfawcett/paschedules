@@ -12,8 +12,7 @@ module.exports = function() {
       max: 25
     }
   };
-
-  // Initialize our service with any options it requires
+  
   app.use('tokens', service(options));
   app.service('tokens').before({
     all: hooks.disable('external')

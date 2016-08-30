@@ -11,8 +11,6 @@ module.exports = function(app) {
         });
       }
 
-      // sections.find({ query: {  } })
-
       res.render('schedule');
     }).catch((error) => {
       res.render('error', {

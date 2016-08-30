@@ -11,6 +11,7 @@ var self = module.exports = {
 
     var title = parts[1];
     if (parts.length === 5) {
+      // Master course 'Advising' vs 'Advising - Teacher'
       // title += ' - ' + parts[2];
     }
 

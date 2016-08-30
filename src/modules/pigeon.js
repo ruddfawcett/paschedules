@@ -24,16 +24,18 @@ module.exports = {
 
         P.resolve();
 
-        // transporter.sendMail(options, (error, info) => {
-        //   if (error) {
-        //     P.reject(error);
-        //   }
-        //
-        //   if (info) {
-        //     console.log('Message sent: ' + info.response);
-        //     P.resolve();
-        //   }
-        // });
+        /** Send mail... TBD...
+        transporter.sendMail(options, (error, info) => {
+          if (error) {
+            P.reject(error);
+          }
+
+          if (info) {
+            console.log('Message sent: ' + info.response);
+            P.resolve();
+          }
+        });
+        **/
 
       break;
     }

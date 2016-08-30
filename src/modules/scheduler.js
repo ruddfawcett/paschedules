@@ -6,10 +6,8 @@ var self = module.exports = {
   parseCalendar: (data) => {
     var P = Q.defer();
 
-    // September 19, 2016
-    var dFrom = new Date(1474257600 * 1000);
-    // September 23, 2016
-    var dTo = new Date(1474686000 * 1000);
+    var dFrom = new Date(1474257600 * 1000);  // September 19, 2016
+    var dTo = new Date(1474686000 * 1000);    // September 23, 2016
     var inRange = [];
 
     for (uid in data) {
@@ -74,38 +72,3 @@ var self = module.exports = {
     return P.promise;
   }
 }
-
-// var courses = [];
-//
-// $.each(days, (d, day) => {
-//   $.each($(day).find('a'), (c, day) => {
-//     var name = $(day).find('.fc-title').text();
-//     var parts = name.split(' - ');
-//
-//     var code = parts[0].trim();
-//     var name = cleanseName(parts[1].trim());
-//     var teacher = cleanseName(parts[2].trim());
-//
-    // var addTimeToCourse = function(course) {
-    //   var range = $(day).find('.fc-time').text();
-    //   var times = range.split(' - ');
-    //
-    //   courses[course].meets[d.toString()] = {
-    //     start: times[0].trim(),
-    //     end: times[1].trim()
-    //   };
-    // }
-//
-//     if (code in courses) {
-//       addTimeToCourse(code);
-//     }
-//     else {
-      // courses[code] = {
-      //   name: name,
-      //   teacher: teacher,
-      //   meets: {}
-      // };
-//       addTimeToCourse(code);
-//     }
-//   });
-// });

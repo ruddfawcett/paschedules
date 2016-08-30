@@ -13,7 +13,6 @@ module.exports = function() {
     }
   };
 
-  // Initialize our service with any options it requires
   app.use('sections', service(options));
   app.service('sections').before({
     all: hooks.disable('external')

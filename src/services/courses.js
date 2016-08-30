@@ -13,7 +13,6 @@ module.exports = function() {
     }
   };
 
-  // Initialize our service with any options it requires
   app.use('courses', service(options));
 
   let createSlug = function(options) {
