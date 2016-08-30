@@ -27,4 +27,11 @@ module.exports = function() {
       createSlug()
     ]
   });
+  app.service('courses').after({
+    find: [
+      hooks.populate('sections', {
+        service: 'sections'
+      })
+    ]
+  });
 };

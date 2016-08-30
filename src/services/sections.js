@@ -17,4 +17,11 @@ module.exports = function() {
   app.service('sections').before({
     all: hooks.disable('external')
   });
+  app.service('sections').after({
+    get: [
+      hooks.populate('teacher', {
+        service: 'users'
+      })
+    ]
+  });
 };
