@@ -3,6 +3,9 @@ const pigeon = require('./pigeon');
 module.exports =  {
   email: (options) => {
     return (hook) => {
+      if (!hook.result.username) {
+        return;
+      }
       const tokens = hook.app.service('tokens');
 
       tokens.create({ target: hook.result._id}).then((result) => {

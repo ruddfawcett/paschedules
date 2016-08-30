@@ -1,13 +1,10 @@
 const router = require('feathers').Router();
 
 module.exports = function(app) {
-  const students = app.service('students');
-  const teachers = app.service('teachers');
+  const users = app.service('users');
 
   router.get('/:username', (req, res, next) => {
-    var email = req.params.username+'@andover.edu';
-
-    students.find({ query: { email: email } }).then((result) => {
+    users.find({ query: { username: req.params.username } }).then((result) => {
       if (!result.data.length) {
         res.render('error', {
           error: new Error('User not found.')

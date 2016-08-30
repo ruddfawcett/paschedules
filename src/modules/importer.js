@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const courses = app.service('courses');
 const sections = app.service('sections');
-const teachers = app.service('teachers');
+const users = app.service('users');
 
 var self = module.exports = {
   import: (data) => {
@@ -42,9 +42,9 @@ var self = module.exports = {
             return P.promise;
           }).then((section) => {
             var P = Q.defer();
-            teachers.find({query: {name: item.teacher}}).then((results) => {
+            users.find({query: item.teacher}).then((results) => {
               if (!results.data.length) {
-                teachers.create(item.teacher).then((teacher) => {
+                users.create(item.teacher).then((teacher) => {
                   sections.update(section._id, {$set: {teacher: teacher._id}}).then((result) => {
                     P.resolve(section);
                   });

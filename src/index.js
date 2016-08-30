@@ -6,7 +6,7 @@ const importer = require('./modules/importer');
 
 const ical = require('ical');
 
-const students = app.service('students');
+const users = app.service('users');
 
 server.on('listening', () => {
   // var profile = {
@@ -20,7 +20,7 @@ server.on('listening', () => {
   //   password: 'test'
   // }
 
-  // students.create(profile).then((result) => {
+  // users.create(profile).then((result) => {
   //   console.log('result', result);
   // }).catch((error) => {
   //   console.log('error',error);

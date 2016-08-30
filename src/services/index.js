@@ -1,5 +1,4 @@
-const students = require('./students');
-const teachers = require('./teachers');
+const users = require('./users');
 const courses = require('./courses');
 const tokens = require('./tokens');
 const sections = require('./sections');
@@ -12,8 +11,7 @@ module.exports = function() {
   mongoose.connect(app.get('mongodb'));
   mongoose.Promise = global.Promise;
 
-  app.configure(students);
-  app.configure(teachers);
+  app.configure(users);
   app.configure(courses);
   app.configure(tokens);
   app.configure(sections);

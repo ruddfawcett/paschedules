@@ -37,10 +37,16 @@ var self = module.exports = {
     let number = data[1].split('-');
 
     var room = parts[3];
-    var teacher = self.teacher(parts[2]);
+    var teacher = {
+      name: self.teacher(parts[2]),
+      role: 'TEACHER'
+    };
 
     if (parts.length === 5) {
-      teacher = self.teacher(parts[3]);
+      teacher = {
+        name: self.teacher(parts[3]),
+        role: 'TEACHER'
+      };
       room = parts[4]
     }
 
@@ -56,8 +62,8 @@ var self = module.exports = {
   },
   teacher: (str) => {
     let parts = str.split(', ');
-    var first = parts[1] ? parts[1].trim() : null;
-    var last = parts[0] ? parts[0].trim() : null;
+    var first = parts[1] ? parts[1].trim() : 'No';
+    var last = parts[0] ? parts[0].trim() : 'Teacher';
 
     return {
       first: first,

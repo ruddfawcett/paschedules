@@ -5,8 +5,8 @@ const SectionSchema = new Schema({
   code: { type: String, required: true },
   number: { type: Number, required: true },
   room: { type: String, required: false },
-  teacher: { type: Schema.Types.ObjectId, ref: 'Teacher', required: false },
-  students: [{ type: Schema.Types.ObjectId, ref: 'Student' }],
+  teacher: { type: Schema.Types.ObjectId, ref: 'User', required: false },
+  students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   meets: [{
     day: { type: Number, required: true },
     start: { type: Date, required: true },
