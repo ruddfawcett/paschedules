@@ -18,10 +18,14 @@ const app = feathers();
 
 app.configure(configuration(path.join(__dirname, '..')));
 app.configure(hooks());
-app.configure(authentication());
+app.configure(authentication({
+  usernameField: 'username',
+  passwordField: 'password',
+  session: true
+}));
 
 app.set('views', path.join(__dirname, '../views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use(compress());
 app.use(bodyParser.json());
@@ -44,7 +48,5 @@ app.configure(rest());
 app.configure(socketio());
 app.configure(services);
 app.configure(middleware);
-
-app.use(handler());
 
 module.exports = app;
