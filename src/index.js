@@ -10,7 +10,7 @@ server.on('listening', () => {
   console.log(`Timetable is live on ${app.get('host')}:${port}.`)
 });
 
-function testCal() {
+function testImporter() {
   ical.fromURL('http://localhost:8080/demo_spec', {}, function(err, data) {
     if (err) console.log(err);
 

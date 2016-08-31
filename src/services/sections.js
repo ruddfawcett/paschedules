@@ -1,5 +1,6 @@
 const service = require('feathers-mongoose');
 const Section = require('../models/section');
+const auth = require('feathers-authentication').hooks;
 const hooks = require('feathers-hooks');
 
 module.exports = function() {
@@ -15,7 +16,12 @@ module.exports = function() {
 
   app.use('/api/sections', service(options));
   app.service('/api/sections').before({
-    all: hooks.disable('external')
+    all: [
+      hooks.disable('external'),
+      auth.verifyToken(),
+      auth.populateUser(),
+      auth.restrictToAuthenticated()
+    ]
   });
   app.service('/api/sections').after({
     get: [

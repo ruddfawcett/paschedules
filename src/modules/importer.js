@@ -27,14 +27,14 @@ var self = module.exports = {
           sections.find({query: {code: item.section.code}}).then((results) => {
             if (!results.data.length) {
               sections.create(item.section).then((section) => {
-                courses.update(course._id, {$push: {sections: section._id}}).then((course) => {
+                courses.update(course._id, {$addToSet: {sections: section._id}}).then((course) => {
                   P.resolve(section);
                 }).catch(self.error);
               }).catch(self.error);
             }
             else {
               var section = results.data[0];
-              courses.update(course._id, {$push: {sections: section._id}}).then((course) => {
+              courses.update(course._id, {$addToSet: {sections: section._id}}).then((course) => {
                 P.resolve(section);
               }).catch(self.error);
             }
@@ -58,7 +58,7 @@ var self = module.exports = {
               }
               return P.promise;
             }).then((section) => {
-              sections.update(section._id, {$push: {students: mongoose.Types.ObjectId('asdfasdfasdf')}});
+              sections.update(section._id, {$addToSet: {students: mongoose.Types.ObjectId('asdfasdfasdf')}});
             }).catch(self.error);;
           });
         });
@@ -67,14 +67,5 @@ var self = module.exports = {
   },
   error: (error) => {
     console.log(error);
-  },
-  clone: (obj) => {
-    var o = {};
-    for (var i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        o[i] = obj[i];
-      }
-    }
-    return o;
   }
 }

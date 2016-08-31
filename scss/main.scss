@@ -1,0 +1,24 @@
+$blue = #0089FF;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Noto', 'PT Sans', sans-serif;
+}
+
+nav {
+  &:first-child {
+    background-color: $blue;
+  }
+}
+
+header {
+
+}
+
+footer {
+
+}

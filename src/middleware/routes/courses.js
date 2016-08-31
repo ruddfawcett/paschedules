@@ -12,13 +12,18 @@ module.exports = function(app) {
         // });
       }
       else {
-        var teachers = [];
+        var sections = [];
         courses.data.forEach((course) => {
           course.sections.forEach((section) => {
-            teachers.push(section.teacher.name.first);
+            sections.push({
+              teacher: section.teacher.name,
+              code: section.code,
+              size: section.students.length,
+              room: section.room
+            });
           });
         });
-        res.json(teachers);
+        res.json(sections);
       }
       // res.render('schedule');
     }).catch((error) => {

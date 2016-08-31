@@ -1,5 +1,6 @@
 const service = require('feathers-mongoose');
 const Course = require('../models/course');
+const auth = require('feathers-authentication').hooks;
 const hooks = require('feathers-hooks');
 
 module.exports = function() {
@@ -22,7 +23,12 @@ module.exports = function() {
   }
 
   app.service('/api/courses').before({
-    all: hooks.disable('external'),
+    all: [
+      hooks.disable('external'),
+      auth.verifyToken(),
+      auth.populateUser(),
+      auth.restrictToAuthenticated()
+    ],
     create: [
       createSlug()
     ]
