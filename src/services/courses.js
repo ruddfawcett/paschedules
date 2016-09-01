@@ -18,7 +18,7 @@ module.exports = function() {
 
   let createSlug = function(options) {
     return function(hook) {
-      hook.data.slug = hook.data.title.toLowerCase().replace(/ /g, '-').replace(':', '');
+      hook.data.slug = hook.data.title.toLowerCase().replace(/ /g, '-').replace(':', '').replace(',','');
     }
   }
 
