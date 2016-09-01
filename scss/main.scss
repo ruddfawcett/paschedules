@@ -1,4 +1,8 @@
-$blue = #0089FF;
+@import '_placeholder';
+
+$blue: #1CA9ED;
+$black-pearl: #1F1F29;
+$charcoal: #282C37;
 
 * {
   padding: 0;
@@ -6,17 +10,93 @@ $blue = #0089FF;
 }
 
 body {
+  background-color: #FAFAFA;
   font-family: 'Noto', 'PT Sans', sans-serif;
 }
 
 nav {
-  &:first-child {
-    background-color: $blue;
-  }
+  color: white;
 }
 
 header {
+  background-color: #0089FF;
+  height: 50px;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  color: white;
+  line-height: 50px;
+  padding: 0 20px;
+  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.25);
 
+  h3 {
+    color: white;
+    text-transform: lowercase;
+    display: inline-block;
+  }
+
+  input {
+    width: 50%;
+    max-width: 400px;
+    position: absolute;
+    font-size: 14px;
+    line-height: 30px;
+    left: 30%;
+    right: 30%;
+    margin: 0 auto;
+    height: 30px;
+    margin-top: 10px;
+    border: none;
+    -webkit-appearance: none;
+    border-radius: 3px;
+    color: white;
+    padding: 0 10px 0 35px;
+    background: #037BE3 no-repeat url('../images/search.svg') center left;
+    background-position: 10px;
+    background-size: 15px;
+
+    &:focus, &:active {
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+div.wrapper {
+  margin-top: 50px;
+  width: 100%;
+  position: absolute;
+}
+
+main {
+  margin: 0 auto;
+
+  .head {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 35px 10% 30px 10%;
+    background-color: $black-pearl;
+    color: white;
+  }
+
+  table {
+    width: 80%;
+    margin: 20px auto 0 auto;
+    display: table;
+    border-spacing: 0;
+    color: $black-pearl;
+
+    th, td {
+      text-align: left;
+      padding: 5px 10px;
+    }
+
+    tbody {
+      tr:nth-child(odd) {
+        background-color: darken(#FAFAFA, 5%);
+      }
+    }
+  }
 }
 
 footer {
