@@ -5,6 +5,7 @@ const SectionSchema = new Schema({
   code: { type: String, required: true },
   number: { type: Number, required: true },
   room: { type: String, required: false },
+  period: { type: Number, required: false, default: 0 },
   teacher: { type: Schema.Types.ObjectId, ref: 'User', required: false },
   students: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   meets: [{

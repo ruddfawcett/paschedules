@@ -14,6 +14,31 @@ module.exports = function() {
     }
   };
 
+  let assignPeriod = (options) => {
+    var timeToPeriod = (start) => {
+      var h = start.getHours();
+      if (h == 8) return 1 ? start.getMinutes() == 0 : 2;
+      if (h == 10) return 3;
+      if (h == 11) return 4;
+      if (h == 12) return 5;
+      if (h == 13) return 6;
+      if (h == 14) return 7;
+      return 0;
+    }
+
+    return function(hook) {
+      hook.data.meets.forEach((meeting) => {
+        if (meeting.day == 3 || meeting.day == 4) {
+          return;
+        }
+        else {
+          hook.data.period = timeToPeriod(meeting.start);
+          return;
+        }
+      });
+    }
+  }
+
   app.use('/api/sections', service(options));
   app.service('/api/sections').before({
     all: [
@@ -21,11 +46,17 @@ module.exports = function() {
       auth.verifyToken(),
       auth.populateUser(),
       auth.restrictToAuthenticated()
+    ],
+    create: [
+      assignPeriod()
     ]
   });
   app.service('/api/sections').after({
     get: [
       hooks.populate('teacher', {
+        service: '/api/users'
+      }),
+      hooks.populate('students', {
         service: '/api/users'
       })
     ]
