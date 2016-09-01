@@ -1,0 +1,23 @@
+extends ./includes/layout.pug
+
+block vars
+  - var path = 'Course'
+
+block content
+  .head
+    h1 #{course.title}
+    h3 #{course.code}
+  table
+    thead
+      tr
+        th Code
+        th Teacher
+        th Period
+        th Students
+    tbody
+      each section in sections
+        tr
+          td #{section.code}
+          td #{section.teacher.first} #{section.teacher.last}
+          td #{section.period}
+          td #{section.size}
