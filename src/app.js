@@ -18,11 +18,21 @@ const app = feathers();
 
 app.configure(configuration(path.join(__dirname, '..')));
 app.configure(hooks());
-app.configure(authentication({
-  usernameField: 'username',
-  passwordField: 'password',
-  session: true
-}));
+
+var defaults = {
+  successRedirect: '/login/success',
+  failureRedirect: '/login/failure',
+  tokenEndpoint: '/login/token',
+  localEndpoint: '/login/local',
+  userEndpoint: '/api/users',
+  local: {
+    usernameField: 'username',
+    passwordField: 'password',
+    session: true
+  }
+};
+
+app.configure(authentication(defaults));
 
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
@@ -30,7 +40,6 @@ app.set('view engine', 'pug');
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/static', feathers.static(path.join(__dirname, '../public')));
 app.options('*', cors());
 
 app.use(
@@ -48,5 +57,7 @@ app.configure(rest());
 app.configure(socketio());
 app.configure(services);
 app.configure(middleware);
+
+app.use('/static', feathers.static(path.join(__dirname, '../public')));
 
 module.exports = app;
