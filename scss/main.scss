@@ -1,8 +1,10 @@
 @import '_placeholder';
 
-$blue: #1CA9ED;
+$blue: #0089FF;
 $black-pearl: #1F1F29;
 $charcoal: #282C37;
+$silver: #C4C9CF;
+$off-white: #FAFAFA;
 
 * {
   padding: 0;
@@ -10,8 +12,9 @@ $charcoal: #282C37;
 }
 
 body {
-  background-color: #FAFAFA;
+  background-color: $off-white;
   font-family: 'Noto', 'PT Sans', sans-serif;
+  min-height: 100%;
 }
 
 nav {
@@ -19,7 +22,7 @@ nav {
 }
 
 header {
-  background-color: #0089FF;
+  background-color: $blue;
   height: 50px;
   width: 100%;
   top: 0;
@@ -27,7 +30,8 @@ header {
   color: white;
   line-height: 50px;
   padding: 0 20px;
-  box-shadow: 0px 1px 4px 0px rgba(0,0,0,0.25);
+  box-shadow: 0px 1px 4px 0px rgba(black,0.25);
+  z-index: 999;
 
   h3 {
     color: white;
@@ -50,8 +54,8 @@ header {
     -webkit-appearance: none;
     border-radius: 3px;
     color: white;
-    padding: 0 10px 0 35px;
-    background: #037BE3 no-repeat url('../images/search.svg') center left;
+    padding: 0 10px 0 32px;
+    background: darken($blue, 6%) no-repeat url('../images/search.svg') center left;
     background-position: 10px;
     background-size: 15px;
 
@@ -74,9 +78,13 @@ main {
   .head {
     max-width: 100%;
     margin: 0 auto;
-    padding: 35px 10% 30px 10%;
+    padding: 45px 10% 40px 10%;
     background-color: $black-pearl;
     color: white;
+
+    h3 {
+      color: $silver;
+    }
   }
 
   table {
@@ -89,16 +97,34 @@ main {
     th, td {
       text-align: left;
       padding: 5px 10px;
+
+      a {
+        text-decoration: none;
+        color: $blue;
+
+        &:hover {
+          border-bottom: 1px solid $blue;
+        }
+      }
     }
 
     tbody {
       tr:nth-child(odd) {
-        background-color: darken(#FAFAFA, 5%);
+        background-color: lighten($silver, 15%);
       }
     }
   }
 }
 
 footer {
+  width: 100%;
+  bottom: 0;
+  position: fixed;
+  background-color: lighten($silver, 15%);
+  padding: 20px 20px;
+  color: darken($silver, 10%);
 
+  h3 {
+    font-size: 16px;
+  }
 }

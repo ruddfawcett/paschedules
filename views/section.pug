@@ -1,0 +1,20 @@
+extends ./includes/layout.pug
+
+block vars
+  - var path = course.title
+
+block content
+  .head
+    h1 #{path}
+    h3 #{section.period}
+  table
+    thead
+      tr
+        th Student
+        th Year
+    tbody
+      each student in section.students
+        tr
+          td 
+            a(href=`/students/${student.username}`) #{student.name.first} #{student.name.last}
+          td #{student.year}
