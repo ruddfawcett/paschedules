@@ -13,8 +13,8 @@ module.exports = function(app) {
         console.log(`found token, target user: ${result.data[0].target}`);
       }
     }).catch((error) => {
-      console.log(error);
-    })
+      next(error);
+    });
   });
 
   return router;

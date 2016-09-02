@@ -1,10 +1,9 @@
-'use strict';
-
 const error = require('feathers-errors/handler');
 const notFound = require('./not-found-handler');
 const logger = require('./logger');
 
-const users = require('./routes/users');
+const students = require('./routes/students');
+const teachers = require('./routes/teachers');
 const courses = require('./routes/courses');
 const verify = require('./routes/verify');
 
@@ -15,11 +14,12 @@ module.exports = function() {
     next();
   });
 
-  app.use('/users', users(app));
+  app.use('/students', students(app));
+  app.use('/teachers', teachers(app));
   app.use('/courses', courses(app));
   app.use('/verify', verify(app));
 
-  app.get('/demo_spec', (req, res) => {
+  app.get('/demo/ical', (req, res) => {
     res.send(require('fs').readFileSync('/Users/ruddfawcett/GitHub/timetable/specs/example.ics', 'utf8'));
   });
 
