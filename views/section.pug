@@ -1,12 +1,13 @@
 extends ./includes/layout.pug
 
 block vars
-  - var path = course.title
+  - var path = `${course.title}, ${section.period}`
 
 block content
   .head
-    h1 #{path}
+    h1 #{course.title}
     h3 #{section.period}
+    h3 #{section.teacher.name.first} #{section.teacher.name.last}
   table
     thead
       tr

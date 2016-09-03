@@ -5,6 +5,7 @@ $black-pearl: #1F1F29;
 $charcoal: #282C37;
 $silver: #C4C9CF;
 $off-white: #FAFAFA;
+$gray: #596981;
 
 * {
   padding: 0;
@@ -32,6 +33,7 @@ header {
   padding: 0 20px;
   box-shadow: 0px 1px 4px 0px rgba(black,0.25);
   z-index: 999;
+  box-sizing: border-box;
 
   h3 {
     color: white;
@@ -45,7 +47,7 @@ header {
     position: absolute;
     font-size: 14px;
     line-height: 30px;
-    left: 30%;
+    left: 35%;
     right: 30%;
     margin: 0 auto;
     height: 30px;
@@ -62,6 +64,31 @@ header {
     &:focus, &:active {
       outline: none;
       border: none;
+      background: white no-repeat url('../images/search-blue.svg') center left;
+      color: $gray;
+      background-position: 10px;
+      background-size: 15px;
+    }
+  }
+
+  nav {
+    float: right;
+    height: inherit;
+
+    a {
+      float: left;
+      height: inherit;
+      border-left: 1px solid darken($blue, 6%);
+      padding: 15px 15px;
+      box-sizing: border-box;
+
+      &:last-child {
+        border-right: 1px solid darken($blue, 6%);
+      }
+
+      img {
+        height: 20px;
+      }
     }
   }
 }
