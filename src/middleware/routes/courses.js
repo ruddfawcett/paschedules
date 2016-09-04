@@ -15,7 +15,7 @@ module.exports = function(app) {
         courses.data.forEach((course) => {
           course.sections.forEach((section) => {
             sections.push({
-              teacher: section.teacher.name,
+              teacher: section.teacher,
               number: section.number,
               period: section.period,
               code: section.code,

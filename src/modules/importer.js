@@ -26,6 +26,7 @@ var self = module.exports = {
           var P = Q.defer();
           sections.find({query: {code: item.section.code}}).then((results) => {
             if (!results.data.length) {
+              item.section.course = course._id;
               sections.create(item.section).then((section) => {
                 courses.update(course._id, {$addToSet: {sections: section._id}}).then((course) => {
                   P.resolve(section);

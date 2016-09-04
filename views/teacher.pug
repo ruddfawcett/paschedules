@@ -1,0 +1,25 @@
+extends ./includes/layout.pug
+
+block vars
+  - var path = `${teacher.name.first} ${teacher.name.last}`
+
+block content
+  .head
+    h1 #{path}
+    h3 Teacher
+  table
+    thead
+      tr
+        th Course
+        th Section
+        th Period
+        th Students
+    tbody
+      each section in sections
+        tr
+          td
+            a(href=`/courses/${section.course.slug}`) #{section.course.title}
+          td
+            a(href=`/courses/${section.course.slug}/${section.number}`) #{section.code}
+          td #{section.period}
+          td #{section.students.length}

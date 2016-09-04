@@ -58,6 +58,14 @@ module.exports = function() {
       }),
       hooks.populate('students', {
         service: '/api/users'
+      }),
+      hooks.populate('course', {
+        service: '/api/courses'
+      })
+    ],
+    find: [
+      hooks.populate('course', {
+        service: '/api/courses'
       })
     ]
   });

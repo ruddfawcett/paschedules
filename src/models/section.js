@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const SectionSchema = new Schema({
   code: { type: String, required: true },
+  course: { type: Schema.Types.ObjectId, ref: 'Course' },
   number: { type: Number, required: true },
   room: { type: String, required: false },
   period: { type: Number, required: false, default: 0 },

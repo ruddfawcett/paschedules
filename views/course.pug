@@ -6,7 +6,7 @@ block vars
 block content
   .head
     h1 #{course.title}
-    h3 #{course.code} &mdash; #{sections.length} #{sections.length > 1 ? 'Sections' : 'Section'}
+    h3 #{course.code}
   table
     thead
       tr
@@ -19,6 +19,7 @@ block content
         tr
           td 
             a(href=`/courses/${course.slug}/${section.number}`) #{section.code}
-          td #{section.teacher.first} #{section.teacher.last}
+          td 
+            a(href=`/teachers/${section.teacher._id}`) #{section.teacher.name.first} #{section.teacher.name.last}
           td #{section.period}
           td #{section.size}
