@@ -6,6 +6,7 @@ const students = require('./routes/students');
 const teachers = require('./routes/teachers');
 const courses = require('./routes/courses');
 const verify = require('./routes/verify');
+const onboarding = require('./routes/onboarding');
 
 module.exports = function() {
   const app = this;
@@ -14,6 +15,7 @@ module.exports = function() {
     next();
   });
 
+  app.use('/', onboarding(app));
   app.use('/students', students(app));
   app.use('/teachers', teachers(app));
   app.use('/courses', courses(app));
