@@ -10,7 +10,9 @@ html(lang='en')
   body
     div.wrapper
       main
-        h1 PASchedules
+        div.title
+          h1 PASchedules
+          block intro
         block form
     include analytics.pug
     script(type='text/javascript', src='//cdn.socket.io/socket.io-1.4.5.js')

@@ -3,11 +3,16 @@ extends ./includes/onboarding.pug
 block vars
   - var path = 'Login'
 
+block intro
+  - if (verify)
+    p Please login to verify your account.
+
 block form
   input(type='text', class='username', placeholder='PAnet Username')
   input(type='password', class='password', placeholder='Password')
   input(type='submit', class='button', value='Login', disabled='true')
-  p Don't have an account? #[a(href='/signup') Signup].
+  - if (!verify)
+    p Don't have an account? #[a(href='/signup') Signup].
 
 block scripts
   script(type='text/javascript').
