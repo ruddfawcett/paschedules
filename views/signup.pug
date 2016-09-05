@@ -4,13 +4,16 @@ block vars
   - var path = 'Signup'
 
 block form
+  input(type='text', class='first name buffer', placeholder='First Name')
+  input(type='text', class='last name', placeholder='Last Name')
   input(type='text', class='username', placeholder='PAnet Username')
   input(type='text', class='ical', placeholder='Calendar URL')
-
   input(type='password', class='password', placeholder='Password')
   input(type='submit', class='button', value='Signup', disabled='true')
   p Have an account? #[a(href='/login') Login].
-
+  br
+  p Find your calendar URL by #[a(href='https://unify-ext.andover.edu/extranet/') navigating to your schedule on PAnet], and clicking the "iCal" button above your calendar.
+  p (In the top right of the screen above #[span(class='code') month | day | year]).
 block scripts
   script(type='text/javascript').
-    validate(['username', 'password', 'ical']);
+    validate(['first', 'last', 'username', 'password', 'ical']);
