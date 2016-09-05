@@ -55,6 +55,13 @@ main {
 
   p {
     color: lighten($gray, 15%);
+    max-width: 80%;
+    margin: 0 auto 5px auto;
+
+    span.code {
+      background-color: lighten($silver, 16%);
+      padding: 3px 6px;
+    }
   }
 }
 
@@ -74,6 +81,16 @@ input {
 
   &:active, &:focus {
     outline: none;
+  }
+
+  &.name {
+    display: inline;
+    width: 145px;
+
+    &.buffer {
+      margin-right: 10px;
+      border-radius: 3px;
+    }
   }
 
   &[type='submit'] {
