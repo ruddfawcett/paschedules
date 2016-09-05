@@ -4,13 +4,10 @@ function validate(fields) {
       return $.trim($(selector).val()).length;
     }
 
-    var values = true;
+    var values = false;
 
     $.each(fields, (idx, field) => {
-      if (hasValue('.'+field)) {
-        values = false;
-      }
-      else {
+      if (!hasValue('.'+field)) {
         values = true;
       }
     });
