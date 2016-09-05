@@ -1,4 +1,5 @@
 const router = require('feathers').Router();
+const errors = require('../../utils/errors.js');
 
 module.exports = function(app) {
   const users = app.service('/api/users');
@@ -7,10 +8,15 @@ module.exports = function(app) {
   router.get('/:token_id', (req, res, next) => {
     tokens.find({ query: {_id: req.params.token_id, valid: true}}).then((result) => {
       if (!result.data.length) {
-        console.log('token not found');
+        res.render('error', {
+          error: errors.NotFoundToken
+        });
       }
       else {
-        console.log(`found token, target user: ${result.data[0].target}`);
+        // app.logout();
+        res.render('login', {
+          verify: true
+        });
       }
     }).catch((error) => {
       next(error);

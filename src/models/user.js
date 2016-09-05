@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   role: { type: String, required: true, enum:[
     'STUDENT', 'TEACHER', 'GOD'
   ]},
-  year: { type: Number, required: false },
+  class: { type: Number, required: false },
   username: { type: String, required: false, lowercase: true },
   calendar: { type: String, required: false }, // api key not URL (rip)
   password: { type: String, required: false },
