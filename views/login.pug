@@ -1,1 +1,14 @@
-h1 hello world
+extends ./includes/onboarding.pug
+
+block vars
+  - var path = 'Login'
+
+block form
+  input(type='text', class='username', placeholder='PAnet Username')
+  input(type='password', class='password', placeholder='Password')
+  input(type='submit', class='button', value='Login', disabled='true')
+  p Or, #[a(href='/signup') signup] if you do not have an account.
+
+block scripts
+  script(type='text/javascript').
+    validate(['username', 'password']);

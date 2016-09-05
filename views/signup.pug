@@ -1,0 +1,16 @@
+extends ./includes/onboarding.pug
+
+block vars
+  - var path = 'Signup'
+
+block form
+  input(type='text', class='username', placeholder='PAnet Username')
+  input(type='text', class='ical', placeholder='Calendar URL')
+
+  input(type='password', class='password', placeholder='Password')
+  input(type='submit', class='button', value='Signup', disabled='true')
+  p Or, #[a(href='/login') login] if you have an account.
+
+block scripts
+  script(type='text/javascript').
+    validate(['username', 'password', 'ical']);
