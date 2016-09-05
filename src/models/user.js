@@ -12,7 +12,10 @@ const UserSchema = new Schema({
   ]},
   class: { type: Number, required: false },
   username: { type: String, required: false, lowercase: true },
-  calendar: { type: String, required: false }, // api key not URL (rip)
+  calendar: {
+    url: { type: String, required: false },
+    version: { type: Number, default: 1 }
+  },
   password: { type: String, required: false },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
