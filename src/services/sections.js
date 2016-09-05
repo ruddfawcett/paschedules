@@ -9,7 +9,7 @@ module.exports = function() {
   const options = {
     Model: Section,
     paginate: {
-      default: 5,
+      default: 15,
       max: 25
     }
   };
@@ -17,7 +17,12 @@ module.exports = function() {
   let assignPeriod = (options) => {
     var timeToPeriod = (start) => {
       var h = start.getHours();
-      if (h == 8) return 1 ? start.getMinutes() == 0 : 2;
+      if (h == 8) {
+        if (start.getMinutes() === 0) {
+          return 1;
+        }
+        return 2;
+      }
       if (h == 10) return 3;
       if (h == 11) return 4;
       if (h == 12) return 5;
