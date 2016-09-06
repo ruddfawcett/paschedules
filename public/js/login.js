@@ -13,12 +13,14 @@ $(function() {
         withCredentials: true
       },
       success: (result) => {
-        console.log(result);
         if (result.code === 200) {
           window.location = '/';
         }
         else if (result.code === 401) {
           $('.message').text('Could not find a user with that username and password.').fadeIn().delay(2000).fadeOut();
+        }
+        else if (result.code === 403) {
+          $('.message').text('Please verify your account before proceeding.').fadeIn().delay(2000).fadeOut();
         }
         else {
           $('.message').text('Error logging in.').fadeIn().delay(2000).fadeOut();

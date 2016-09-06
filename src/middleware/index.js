@@ -12,6 +12,7 @@ module.exports = function() {
   const app = this;
 
   app.use('/', onboarding(app));
+  app.use('/verify', verify(app));
   app.get('*', (req, res, next) => {
     if (!req.isAuthenticated()) {
       res.redirect('/login');
@@ -28,7 +29,6 @@ module.exports = function() {
   app.use('/students', students(app));
   app.use('/teachers', teachers(app));
   app.use('/courses', courses(app));
-  app.use('/verify', verify(app));
 
   app.get('/demo/ical', (req, res) => {
     res.send(require('fs').readFileSync('/Users/ruddfawcett/GitHub/timetable/specs/example.ics', 'utf8'));

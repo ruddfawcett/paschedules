@@ -28,8 +28,8 @@ module.exports = function(app) {
       users.find({query: {username: username, role: 'STUDENT'}}).then((results) => {
         if (!results.data.length) { return done(null, false); }
         else {
-          results.data[0].verifyPassword(password, (err, result) => {
-            if (err || !result) {
+          results.data[0].verifyPassword(password, (err, match) => {
+            if (err || !match) {
               return done(null, false);
             }
             else {
@@ -61,6 +61,7 @@ module.exports = function(app) {
       if (error) { return res.json({code: 500}); }
       if (!user) { return res.json({code: 401}); }
       req.logIn(user, function(error) {
+        if (!req.body.token && !user.verified) { return res.json({code: 403}); }
         if (error) { return res.json({code: 500}); }
         return res.json({code: 200});
       });

@@ -8,15 +8,12 @@ module.exports = function(app) {
   router.get('/:token_id', (req, res, next) => {
     tokens.find({ query: {_id: req.params.token_id, valid: true}}).then((result) => {
       if (!result.data.length) {
-        res.render('error', {
-          error: errors.NotFoundToken
-        });
+        return res.render('error', {error: errors.NotFoundToken});
       }
       else {
-        // app.logout();
-        res.render('login', {
-          verify: true
-        });
+        req.logout();
+        req.session.destroy(null);
+        res.render('login', {verify: true});
       }
     }).catch((error) => {
       next(error);
