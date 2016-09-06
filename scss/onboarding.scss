@@ -1,4 +1,9 @@
-@import '_palatte';
+$blue: #0089FF;
+$black-pearl: #1F1F29;
+$charcoal: #282C37;
+$silver: #C4C9CF;
+$off-white: #FAFAFA;
+$gray: #596981;
 
 ::-webkit-input-placeholder {
   color: lighten($gray, 10%);
