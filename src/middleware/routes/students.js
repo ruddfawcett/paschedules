@@ -1,5 +1,6 @@
 const router = require('feathers').Router();
 const errors = require('../../utils/errors.js');
+
 module.exports = function(app) {
   const users = app.service('/api/users');
   const sections = app.service('/api/sections');
