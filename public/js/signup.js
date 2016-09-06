@@ -1,5 +1,5 @@
 $(function() {
-  $('.button').on('click touchstart', () => {
+  $('.button').bind('click touchstart', () => {
     function hasValue(obj) {
       return $.trim($(obj).val()).length;
     }
