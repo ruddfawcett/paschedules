@@ -74,6 +74,12 @@ main {
       margin-bottom: 10px;
     }
   }
+
+  img.loading {
+    display: none;
+    margin: 0 auto;
+    height: 50px;
+  }
 }
 
 input {
@@ -106,7 +112,7 @@ input {
 
   &[type='submit'] {
     margin: 20px auto;
-    background-color: transparent;
+    background-color: lighten($silver, 5%);
     border: none;
     color: white;
     -webkit-transition: background 0.3s ease;

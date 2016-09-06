@@ -13,6 +13,12 @@ $(function() {
       type: 'POST',
       url: '/login',
       data: credentials,
+      beforeSend: function(){
+          $('.loading').show();
+      },
+      complete: function(){
+          $('.loading').hide();
+      },
       xhrFields: {
         withCredentials: true
       },
