@@ -13,7 +13,10 @@ module.exports = function(app) {
       else {
         req.logout();
         req.session.destroy(null);
-        res.render('login', {verify: true});
+        res.render('login', {
+          verify: true,
+          token: req.params.token_id
+        });
       }
     }).catch((error) => {
       next(error);

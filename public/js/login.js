@@ -5,6 +5,10 @@ $(function() {
       password: $('.password').val().trim()
     }
 
+    if (typeof token !== 'undefined') {
+      credentials.token = token;
+    }
+
     $.ajax({
       type: 'POST',
       url: '/login',
@@ -13,7 +17,7 @@ $(function() {
         withCredentials: true
       },
       success: (result) => {
-        if (result.code === 200) {
+        if (result.code === 200 || result.code === 201) {
           window.location = '/';
         }
         else if (result.code === 401) {

@@ -4,13 +4,13 @@ const Q = require('q');
 const app = require('../app');
 const mongoose = require('mongoose');
 
-const courses = app.service('/api/courses');
-const sections = app.service('/api/sections');
-const users = app.service('/api/users');
-
 var self = module.exports = {
-  import: (data) => {
-    scheduler.parseCalendar(data).then(scheduler.buildSchedule).then((items) => {
+  import: (app, user, data) => {
+    const courses = app.service('/api/courses');
+    const sections = app.service('/api/sections');
+    const users = app.service('/api/users');
+
+    return scheduler.parseCalendar(data).then(scheduler.buildSchedule).then((items) => {
       async.each(items, (item) => {
         courses.find({ query: {code: item.course.code}}).then((results) => {
           var P = Q.defer();
@@ -59,7 +59,7 @@ var self = module.exports = {
               }
               return P.promise;
             }).then((section) => {
-              sections.update(section._id, {$addToSet: {students: mongoose.Types.ObjectId('asdfasdfasdf')}});
+              sections.update(section._id, {$addToSet: {students: user._id}});
             }).catch(self.error);;
           });
         });

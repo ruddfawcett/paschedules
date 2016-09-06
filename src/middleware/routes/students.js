@@ -6,9 +6,9 @@ module.exports = function(app) {
   const sections = app.service('/api/sections');
 
   router.get('/:username', (req, res, next) => {
-    users.find({ query: { username: req.params.username, role: 'STUDENT' } }).then((students) => {
+    users.find({ query: { username: req.params.username, verified: true, role: 'STUDENT' } }).then((students) => {
       if (!students.data.length) { next(errors.NotFoundStudent); }
-         else {
+      else {
         var student = students.data[0];
         sections.find({ query: { students: student }}).then((sections) => {
           if (!sections.data.length) { next(errors.NotFound); }
