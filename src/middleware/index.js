@@ -14,7 +14,6 @@ module.exports = function() {
   app.use('/', onboarding(app));
   app.get('*', (req, res, next) => {
     if (!req.isAuthenticated()) {
-      console.log('testttt');
       res.redirect('/login');
     }
     else {
@@ -23,7 +22,7 @@ module.exports = function() {
   });
   app.get('/', (req, res, next) => {
     if (req.isAuthenticated()) {
-      res.redirect('/users/'+req.user.username);
+      res.redirect('/students/'+req.user.username);
     }
   });
   app.use('/students', students(app));

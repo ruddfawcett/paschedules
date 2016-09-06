@@ -6,8 +6,15 @@ const LocalStrategy = require('passport-local').Strategy
 module.exports = function(app) {
   const users = app.service('/api/users');
 
+  router.get('/logout', (req, res, next) => {
+    req.logout();
+    req.session.destroy(function (err) {
+      return res.redirect('/login');
+    });
+  });
+
   router.get('/login', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/users/'+req.user.username);}
+    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
     res.render('login');
   });
 
@@ -49,7 +56,7 @@ module.exports = function(app) {
   });
 
   router.post('/login', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/users/'+req.user.username);}
+    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
     passport.authenticate('local', {session: true}, (error, user, info) => {
       if (error) { return res.json({code: 500}); }
       if (!user) { return res.json({code: 401}); }
@@ -61,16 +68,24 @@ module.exports = function(app) {
   });
 
   router.get('/signup', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/users/'+req.user.username);}
+    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
     res.render('signup');
   });
 
   router.post('/signup', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/users/'+req.user.username);}
+    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
+
+    if (!req.body.ical.startsWith('https://unify-ext.andover.edu/extranet/Student/OpenCalendar')) {
+      return res.json({code: 400});
+    }
+
     var Student = {
       name: {
         first: req.body.name.first,
         last: req.body.name.last
+      },
+      calendar: {
+        url: req.body.ical
       },
       username: req.body.username,
       password: req.body.password,
