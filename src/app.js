@@ -16,6 +16,7 @@ const errors = require('./utils/errors.js');
 
 const flash = require('connect-flash');
 const session = require('express-session');
+const cookieSession = require('cookie-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy
 const cookieParser = require('cookie-parser');
@@ -49,14 +50,11 @@ app.use(
 app.configure(rest());
 app.use('/static', feathers.static(path.join(__dirname, '../public')));
 
-app.use(session({
-  secret: 'f7b5eec8!',
-  saveUninitialized: true,
-  resave: true,
-  cookie : {
-    maxAge: 3600000 // see below
-  }
+app.use(cookieSession({
+    secret: 'f7b5eec8!',
+    maxAge: 1000*60*60
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.configure(services);

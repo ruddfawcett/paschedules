@@ -11,9 +11,8 @@ module.exports = function(app) {
 
   router.get('/logout', (req, res, next) => {
     req.logout();
-    req.session.destroy(function (err) {
-      return res.redirect('/login');
-    });
+    req.session = null;
+    return res.redirect('/login');
   });
 
   router.get('/login', (req, res, next) => {
