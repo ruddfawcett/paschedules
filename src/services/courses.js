@@ -16,7 +16,7 @@ module.exports = function() {
 
   app.use('/api/courses', service(options));
 
-  let createSlug = function(options) {
+  var createSlug = function(options) {
     return function(hook) {
       hook.data.slug = hook.data.title.toLowerCase().replace(/ /g, '-').replace(':', '').replace(',','');
     }
