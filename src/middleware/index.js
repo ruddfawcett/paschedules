@@ -11,11 +11,21 @@ const onboarding = require('./routes/onboarding');
 module.exports = function() {
   const app = this;
 
-  app.get('*', (req, res, next) => {
-    next();
-  });
-
   app.use('/', onboarding(app));
+  app.get('*', (req, res, next) => {
+    if (!req.isAuthenticated()) {
+      console.log('testttt');
+      res.redirect('/login');
+    }
+    else {
+      next();
+    }
+  });
+  app.get('/', (req, res, next) => {
+    if (req.isAuthenticated()) {
+      res.redirect('/users/'+req.user.username);
+    }
+  });
   app.use('/students', students(app));
   app.use('/teachers', teachers(app));
   app.use('/courses', courses(app));

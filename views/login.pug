@@ -8,12 +8,15 @@ block intro
     p Please login to verify your account.
 
 block form
-  input(type='text', class='username', placeholder='PAnet Username')
-  input(type='password', class='password', placeholder='Password')
+  //- form(action='/login', method='post')
+  input(type='text', class='username', name='username', placeholder='PAnet Username')
+  input(type='password', class='password', name='password', placeholder='Password')
   input(type='submit', class='button', value='Login', disabled='true')
+  p(class='message')
   - if (!verify)
     p Don't have an account? #[a(href='/signup') Signup].
 
 block scripts
   script(type='text/javascript').
     validate(['username', 'password']);
+  script(type='text/javascript', src='/static/js/login.js')

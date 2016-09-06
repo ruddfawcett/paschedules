@@ -7,13 +7,18 @@ const cors = require('cors');
 const socketio = require('feathers-socketio');
 const bodyParser = require('body-parser');
 const handler = require('feathers-errors/handler');
-const authentication = require('feathers-authentication');
 const configuration = require('feathers-configuration');
 const middleware = require('./middleware');
 const services = require('./services');
 const sass = require('node-sass-middleware');
 const hooks = require('feathers-hooks');
 const errors = require('./utils/errors.js');
+
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy
+const cookieParser = require('cookie-parser');
 
 const app = feathers();
 
@@ -24,8 +29,9 @@ app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'pug');
 
 app.use(compress());
-app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(favicon(path.join(__dirname, '../public/assets/images/favicon.ico')));
 app.options('*', cors());
 
@@ -41,26 +47,20 @@ app.use(
 );
 
 app.configure(rest());
-app.configure(socketio());
+app.use('/static', feathers.static(path.join(__dirname, '../public')));
+
+app.use(session({
+  secret: 'f7b5eec8!',
+  saveUninitialized: true,
+  resave: true,
+  cookie : {
+    maxAge: 3600000 // see below
+  }
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 app.configure(services);
 app.configure(middleware);
-
-var defaults = {
-  successRedirect: '/login/success',
-  failureRedirect: '/login/failure',
-  tokenEndpoint: '/login/token',
-  localEndpoint: '/login/local',
-  userEndpoint: '/api/users',
-  local: {
-    usernameField: 'username',
-    passwordField: 'password',
-    session: true
-  }
-};
-
-app.configure(authentication(defaults));
-
-app.use('/static', feathers.static(path.join(__dirname, '../public')));
 
 app.get('*', (req, res, next) => {
   res.render('error', {

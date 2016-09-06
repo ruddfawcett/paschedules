@@ -4,18 +4,23 @@ block vars
   - var path = 'Signup'
 
 block form
-  input(type='text', class='first name buffer', placeholder='First Name')
-  input(type='text', class='last name', placeholder='Last Name')
-  input(type='text', class='username', placeholder='PAnet Username')
-  input(type='text', class='ical', placeholder='Calendar URL')
+  input(type='text', class='first inline buffer', placeholder='First Name')
+  input(type='text', class='last inline', placeholder='Last Name')
+  br
+  input(type='text', class='username inline buffer', placeholder='PAnet Username')
+  input(type='text', class='class inline', placeholder='Class')
+  input(type='text', class='ical', placeholder='iCal URL')
   input(type='password', class='password', placeholder='Password')
   input(type='submit', class='button', value='Signup', disabled='true')
+  p(class='message')
   p Have an account? #[a(href='/login') Login].
+  br
   br
   p Find your calendar URL by #[a(href='https://unify-ext.andover.edu/extranet/') navigating to your schedule on PAnet], and clicking the "iCal" button above your calendar.
   p (In the top right of the screen above #[span(class='code') month | day | year]).
   br
-  p #[b Teachers, signup is unavailbe for you yet, sorry!] 
+  p #[b Teachers: signup is unavailbe for you yet, sorry!]
 block scripts
   script(type='text/javascript').
-    validate(['first', 'last', 'username', 'password', 'ical']);
+    validate(['first', 'last', 'username', 'class', 'password', 'ical']);
+  script(type='text/javascript', src='/static/js/signup.js')
