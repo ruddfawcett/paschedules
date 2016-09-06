@@ -6,7 +6,7 @@ var self = module.exports = {
     }
   },
   course: (str) => {
-    let parts = self.parts(str);
+    var parts = self.parts(str);
     var data = parts[0].split('/');
 
     var title = parts[1];
@@ -33,9 +33,9 @@ var self = module.exports = {
     }
   },
   section: (str) => {
-    let parts = self.parts(str);
+    var parts = self.parts(str);
     var data = parts[0].split('/');
-    let number = data[1].split('-');
+    var number = data[1].split('-');
 
     var room = parts[3];
     var teacher = {
@@ -62,7 +62,7 @@ var self = module.exports = {
     return str.split(' - ');
   },
   teacher: (str) => {
-    let parts = str.split(', ');
+    var parts = str.split(', ');
     var first = parts[1] ? parts[1].trim() : 'No';
     var last = parts[0] ? parts[0].trim() : 'Teacher';
 
