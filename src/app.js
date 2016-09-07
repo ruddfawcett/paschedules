@@ -51,7 +51,7 @@ app.configure(rest());
 app.use('/static', feathers.static(path.join(__dirname, '../public')));
 
 app.use(cookieSession({
-    secret: 'f7b5eec8!',
+    secret: process.env.COOKIE_SECRET || 'secret',
     maxAge: 1000*60*60
 }));
 

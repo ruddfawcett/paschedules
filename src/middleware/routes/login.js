@@ -9,20 +9,12 @@ module.exports = function(app) {
   const users = app.service('/api/users');
   const tokens = app.service('/api/tokens');
 
-  router.get('/logout', (req, res, next) => {
-    req.logout();
-    req.session = null;
-    return res.redirect('/login');
-  });
-
-  router.get('/login', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
+  router.get('/', (req, res, next) => {
+    if (req.isAuthenticated()) {return res.redirect('/');}
     return res.render('login');
   });
 
-  passport.use(new LocalStrategy({
-    passReqToCallback: true
-  }, (req, username, password, done) => {
+  passport.use(new LocalStrategy({passReqToCallback: true}, (req, username, password, done) => {
     if (req.body.token) {
       users.find({query: {username: username, role: 'STUDENT'}}).then((results) => {
         if (!results.data.length) { return done(null, false); }
@@ -94,64 +86,17 @@ module.exports = function(app) {
     });
   });
 
-  router.post('/login', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
+  router.post('/', (req, res, next) => {
+    if (req.isAuthenticated()) {res.json({code: 200, path: '/students/'+req.user.username});}
     passport.authenticate('local', {session: true}, (error, user, info) => {
       if (error) { return res.json({code: 500}); }
       if (!user) { return res.json({code: 401}); }
       req.logIn(user, function(error) {
         if (!req.body.token && !user.verified) { return res.json({code: 403}); }
         if (error) { return res.json({code: 500}); }
-        return res.json({code: 200});
+        return res.json({code: 200, path: '/students/'+req.user.username});
       });
     })(req, res, next);
-  });
-
-  router.get('/signup', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
-    res.render('signup');
-  });
-
-  router.post('/signup', (req, res, next) => {
-    if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
-
-    if (!req.body.ical.startsWith('https://unify-ext.andover.edu/extranet/Student/OpenCalendar')) {
-      return res.json({code: 400});
-    }
-
-    var Student = {
-      name: {
-        first: req.body.name.first,
-        last: req.body.name.last
-      },
-      calendar: {
-        url: req.body.ical
-      },
-      username: req.body.username,
-      password: req.body.password,
-      class: req.body.class,
-      role: 'STUDENT'
-    }
-
-    users.find({query: {username: Student.username, role: 'STUDENT'}}).then((result) => {
-      if (!result.data.length) {
-        users.create(Student).then((result) => {
-          if (result) {
-            return res.json({code: 201});
-          }
-          else {
-            return res.json({code: 500});
-          }
-        }).catch((error) => {
-          return res.json({code: 500});
-        });
-      }
-      else {
-        return res.json({code: 409});
-      }
-    }).catch((error) => {
-      return res.json({code: 500});
-    });
   });
 
   return router;
