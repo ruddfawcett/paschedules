@@ -13,7 +13,7 @@ module.exports = function(app) {
         sections.find({ query: { teacher: teacher._id }}).then((sections) => {
           if (!sections.data.length) { next(errors.NotFound); }
           else {
-            res.render('teacher', {
+            return res.render('teacher', {
               teacher: teacher,
               sections: sections.data
             });
@@ -21,7 +21,7 @@ module.exports = function(app) {
         });
       }
     }).catch((error) => {
-      res.render('error', {
+      return res.render('error', {
         error: error
       });
     });

@@ -61,7 +61,7 @@ app.configure(services);
 app.configure(middleware);
 
 app.get('*', (req, res, next) => {
-  res.render('error', {
+  return res.render('error', {
     error: errors.NotFound
   });
 });

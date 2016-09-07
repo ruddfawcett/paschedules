@@ -17,7 +17,7 @@ module.exports = function(app) {
 
   router.get('/login', (req, res, next) => {
     if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
-    res.render('login');
+    return res.render('login');
   });
 
   passport.use(new LocalStrategy({
@@ -137,20 +137,20 @@ module.exports = function(app) {
       if (!result.data.length) {
         users.create(Student).then((result) => {
           if (result) {
-            res.json({code: 201});
+            return res.json({code: 201});
           }
           else {
-            res.json({code: 500});
+            return res.json({code: 500});
           }
         }).catch((error) => {
-          res.json({code: 500});
+          return res.json({code: 500});
         });
       }
       else {
-        res.json({code: 409});
+        return res.json({code: 409});
       }
     }).catch((error) => {
-      res.json({code: 500});
+      return res.json({code: 500});
     });
   });
 

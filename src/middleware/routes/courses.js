@@ -23,7 +23,7 @@ module.exports = function(app) {
             });
           });
         });
-        res.render('course', {
+        return res.render('course', {
           course: courses.data[0],
           sections: sections
         });
@@ -42,7 +42,7 @@ module.exports = function(app) {
         async.each(courses.data[0].sections, (section) => {
           section.period = addSufix(section.period) + ' Period';
           if (section.number == sectionNumber) {
-          result = true;
+            result = true;
             return res.render('section', {
               course: courses.data[0],
               section: section
@@ -50,7 +50,7 @@ module.exports = function(app) {
           }
         });
         if (!result) {
-          res.render('error', {error: errors.NotFound});
+          return res.render('error', {error: errors.NotFound});
         }
       }
     }).catch((error) => {

@@ -26,7 +26,7 @@ module.exports = function(app) {
             theSections.sort(function(a,b) {
               return a.period > b.period;
             });
-            res.render('student', {
+            return res.render('student', {
               student: student,
               sections: theSections,
               other: periodZero
@@ -35,7 +35,7 @@ module.exports = function(app) {
         });
       }
     }).catch((error) => {
-      res.render('error', {
+      return res.render('error', {
         error: error
       });
     });

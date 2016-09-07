@@ -17,7 +17,7 @@ module.exports = function() {
   app.use('/verify', verify(app));
   app.get('*', (req, res, next) => {
     if (!req.isAuthenticated()) {
-      res.redirect('/login');
+      return res.redirect('/login');
     }
     else {
       next();
@@ -25,7 +25,7 @@ module.exports = function() {
   });
   app.get('/', (req, res, next) => {
     if (req.isAuthenticated()) {
-      res.redirect('/students/'+req.user.username);
+      return res.redirect('/students/'+req.user.username);
     }
   });
   app.use('/students', students(app));
@@ -34,14 +34,10 @@ module.exports = function() {
   app.use('/search', search(app));
   app.use('/tools', tools(app));
 
-  app.get('/demo/ical', (req, res) => {
-    res.send(require('fs').readFileSync('/Users/ruddfawcett/GitHub/timetable/specs/example.ics', 'utf8'));
-  });
-
   app.use(logger(app));
   app.use(error({
     html: (error, req, res, next) => {
-      res.render('error', {
+      return res.render('error', {
         error: error
       });
     }

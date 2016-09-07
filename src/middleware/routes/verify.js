@@ -14,7 +14,7 @@ module.exports = function(app) {
       else {
         req.logout();
         req.session = null;
-        res.render('login', {
+        return res.render('login', {
           verify: true,
           token: req.params.token_id
         });
