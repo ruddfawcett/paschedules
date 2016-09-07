@@ -1,5 +1,5 @@
 $(function() {
-  $('.button').bind('click touchstart', () => {
+  $('.button').bind('click touchstart', fuction() {
     var credentials = {
       username: $('.username').val().trim().toLowerCase(),
       password: $('.password').val().trim()
@@ -13,16 +13,16 @@ $(function() {
       type: 'POST',
       url: '/login',
       data: credentials,
-      beforeSend: function(){
+      beforeSend: function() {
           $('.loading').show();
       },
-      complete: function(){
+      complete: function() {
           $('.loading').hide();
       },
       xhrFields: {
         withCredentials: true
       },
-      success: (result) => {
+      success: function(result) {
         if (result.code === 200 || result.code === 201) {
           window.location = '/';
         }

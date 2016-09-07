@@ -1,5 +1,5 @@
 $(function() {
-  $('.button').bind('click touchstart', () => {
+  $('.button').bind('click touchstart', function() {
     function hasValue(obj) {
       return $.trim($(obj).val()).length;
     }
@@ -41,7 +41,7 @@ $(function() {
         type: 'POST',
         url: '/signup',
         data: student,
-        success: (result) => {
+        success: function(result) {
           if (result.code === 201) {
             $('.message').text('Your account was created, a verification email has been sent to your Andover account.').fadeIn();
             setTimeout(function(){ window.location = '/'; }, 5000);

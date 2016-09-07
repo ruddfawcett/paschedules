@@ -6,7 +6,7 @@ function validate(fields) {
 
     var values = false;
 
-    $.each(fields, (idx, field) => {
+    $.each(fields, function(idx, field) {
       if (!hasValue('.'+field)) {
         values = true;
       }
@@ -16,12 +16,12 @@ function validate(fields) {
   }
 
   // If jQuery is super slow to load we still want the button to show up
-  setInterval(() => {
+  setInterval(function() {
     doWork();
   }, 1000);
 
   // When the user releases a key
-  $(document).keyup(() => {
+  $(document).keyup(function() {
     doWork();
   });
 }
