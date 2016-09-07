@@ -53,7 +53,7 @@ module.exports = function(app) {
             return res.render('error', {error: errors.NotFound});
           }
           else {
-          return res.render('section', result);
+            return res.render('section', result);
           }
         });
       }
