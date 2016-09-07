@@ -28,9 +28,8 @@ function validate(fields) {
   });
 
   $(document).keypress(function (e) {
-    e.preventDefault();
     if (e.which == 13) {
-      console.log('enter');
+      e.preventDefault();
       if (!doWork()) {
         $('.button').click();
       }
