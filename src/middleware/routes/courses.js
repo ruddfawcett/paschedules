@@ -38,20 +38,16 @@ module.exports = function(app) {
     courses.find({ query: { slug: req.params.slug}}).then((courses) => {
       if (!courses.data.length) { next(errors.NotFound); }
       else {
-        var result = false;
-        async.each(courses.data[0].sections, (section) => {
+        async.forEachOf(courses.data[0].sections, (section, idx, callback) => {
           section.period = addSufix(section.period) + ' Period';
           if (section.number == sectionNumber) {
-            result = true;
             return res.render('section', {
               course: courses.data[0],
               section: section
             });
           }
+          callback();
         });
-      }
-      if (!result) {
-        return res.render('error', {error: errors.NotFound});
       }
     }).catch((error) => {
       next(error);
