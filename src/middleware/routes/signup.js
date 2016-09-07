@@ -5,12 +5,12 @@ module.exports = function(app) {
   const users = app.service('/api/users');
   const tokens = app.service('/api/tokens');
 
-  router.get('/signup', (req, res, next) => {
+  router.get('/', (req, res, next) => {
     if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
     res.render('signup');
   });
 
-  router.post('/signup', (req, res, next) => {
+  router.post('/', (req, res, next) => {
     if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
 
     if (!req.body.ical.startsWith('https://unify-ext.andover.edu/extranet/Student/OpenCalendar')) {
