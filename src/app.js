@@ -24,16 +24,16 @@ const cookieParser = require('cookie-parser');
 const app = feathers();
 
 // Force SSL
-app.configure(function () {
-   if (app.get('env') === 'production') {
-     app.use(function (req, res, next) {
-       if (req.headers['x-forwarded-proto'] !== 'https') {
-         return res.redirect(['https://', req.get('Host'), req.url].join(''));
-       }
-       return next();
-     });
-   }
- });
+// app.configure(function () {
+//   if (app.get('env') === 'production') {
+//     app.use(function (req, res, next) {
+//       if (req.headers['x-forwarded-proto'] !== 'https') {
+//         return res.redirect(['https://', req.get('Host'), req.url].join(''));
+//       }
+//       return next();
+//     });
+//   }
+// });
 
 app.configure(configuration(path.join(__dirname, '..')));
 app.configure(hooks());
@@ -63,8 +63,8 @@ app.configure(rest());
 app.use('/static', feathers.static(path.join(__dirname, '../public')));
 
 app.use(cookieSession({
-    secret: process.env.COOKIE_SECRET || 'secret',
-    maxAge: 1000*60*60
+  secret: process.env.COOKIE_SECRET || 'secret',
+  maxAge: 1000*60*60
 }));
 
 app.use(passport.initialize());
