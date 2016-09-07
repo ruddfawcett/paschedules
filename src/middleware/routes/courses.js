@@ -38,15 +38,23 @@ module.exports = function(app) {
     courses.find({ query: { slug: req.params.slug}}).then((courses) => {
       if (!courses.data.length) { next(errors.NotFound); }
       else {
-        async.forEachOf(courses.data[0].sections, (section, idx, callback) => {
+        async.each(courses.data[0].sections, (section, callback) => {
           section.period = addSufix(section.period) + ' Period';
           if (section.number == sectionNumber) {
-            return res.render('section', {
+            var data = {
               course: courses.data[0],
               section: section
-            });
+            };
+            return callback(data);
           }
           callback();
+        }, (result) => {
+          if (result.error) {
+            return res.render('error', {error: errors.NotFound});
+          }
+          else {
+          return res.render('section', result);
+          }
         });
       }
     }).catch((error) => {
