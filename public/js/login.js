@@ -24,7 +24,7 @@ $(function() {
       },
       success: function(result) {
         if (result.code === 200 || result.code === 201) {
-          window.location = '/';
+          location.reload();
         }
         else if (result.code === 401) {
           $('.message').text('Could not find a user with that username and password.').fadeIn().delay(2000).fadeOut();
