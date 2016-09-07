@@ -73,12 +73,25 @@ main {
       display: none;
       margin-bottom: 10px;
     }
+
+    &.info {
+      -webkit-transition: opacity 0.3s ease;
+      -moz-transition: opacity 0.3s ease;
+      -ms-transition: opacity 0.3s ease;
+      -o-transition: opacity 0.3s ease;
+      transition: opacity 0.3s ease;
+      opacity: 1;
+
+      &.none {
+        opacity: 0;
+      }
+    }
   }
 
   img.loading {
     display: none;
     margin: 0 auto;
-    height: 50px;
+    height: 40px;
     margin-bottom: 10px;
   }
 }

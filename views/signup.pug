@@ -12,15 +12,16 @@ block form
   input(type='text', class='ical', placeholder='iCal URL')
   input(type='password', class='password', placeholder='Password')
   input(type='submit', class='button', value='Signup', disabled='true')
+  img(class='loading', src='/static/assets/images/loading.svg')
   p(class='message')
-  p Have an account? #[a(href='/login') Login].
+  p(class='info') Have an account? #[a(href='/login') Login].
   br
   br
-  p Find your calendar URL by #[a(href='https://unify-ext.andover.edu/extranet/') navigating to your schedule on PAnet], and clicking the "iCal" button above your calendar.
-  p (In the top right of the screen above #[span(class='code') month | day | year]).
+  p(class='info') Find your calendar URL by #[a(href='https://unify-ext.andover.edu/extranet/') navigating to your schedule on PAnet], and clicking the "iCal" button above your calendar.
+  p(class='info') (In the top right of the screen above #[span(class='code') month | day | year]).
   br
-  p #[b Teachers: signup is unavailbe for you yet, sorry!]
+  p(class='info') #[b Teachers: signup is unavailbe for you yet, sorry!]
 block scripts
   script(type='text/javascript').
     validate(['first', 'last', 'username', 'ical', 'class', 'password']);
-  script(type='text/javascript', src='/static/js/signup.js')
+  script(type='text/javascript', src='/static/js/min/signup.js')

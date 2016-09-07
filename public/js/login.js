@@ -14,10 +14,10 @@ $(function() {
       url: '/login',
       data: credentials,
       beforeSend: function() {
-          $('.loading').show();
+        $('.loading').show();
       },
       complete: function() {
-          $('.loading').hide();
+        $('.loading').hide();
       },
       xhrFields: {
         withCredentials: true

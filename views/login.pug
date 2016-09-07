@@ -14,7 +14,7 @@ block form
   img(class='loading', src='/static/assets/images/loading.svg')
   p(class='message')
   - if (!verify)
-    p Don't have an account? #[a(href='/signup') Signup].
+    p(class='info') Don't have an account? #[a(href='/signup') Signup].
   - else
     p Once you login, you will have to wait around 15 seconds for your information to be imported from PA's scheduling system.
     p (It's very slow.) #[b Do not leave the page.]
@@ -25,4 +25,4 @@ block scripts
   - if (verify)
     script(type='text/javascript').
       var token = !{JSON.stringify(token)};
-  script(type='text/javascript', src='/static/js/login.js')
+  script(type='text/javascript', src='/static/js/min/login.js')

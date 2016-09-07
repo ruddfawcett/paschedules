@@ -41,6 +41,12 @@ $(function() {
         type: 'POST',
         url: '/signup',
         data: student,
+        beforeSend: function() {
+          $('.loading').show();
+        },
+        complete: function() {
+          $('.loading').hide();
+        },
         success: function(result) {
           if (result.code === 201) {
             $('.message').text('Your account was created, a verification email has been sent to your Andover account.').fadeIn();
