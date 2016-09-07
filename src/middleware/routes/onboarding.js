@@ -25,9 +25,9 @@ module.exports = function(app) {
   }, (req, username, password, done) => {
     if (req.body.token) {
       users.find({query: {username: username, role: 'STUDENT'}}).then((results) => {
-        if (!results.length) { return done(null, false); }
+        if (!results.data.length) { return done(null, false); }
         else {
-          var user = results[0];
+          var user = results.data[0];
           user.verifyPassword(password, (err, match) => {
             if (err || !match) {
               return done(null, false);
@@ -65,14 +65,14 @@ module.exports = function(app) {
     }
     else {
       users.find({query: {username: username, verified: true, role: 'STUDENT'}}).then((results) => {
-        if (!results.length) { return done(null, false); }
+        if (!results.data.length) { return done(null, false); }
         else {
-          results[0].verifyPassword(password, (err, match) => {
+          results.data[0].verifyPassword(password, (err, match) => {
             if (err || !match) {
               return done(null, false);
             }
             else {
-              return done(null, results[0]);
+              return done(null, results.data[0]);
             }
           });
         }
@@ -134,7 +134,7 @@ module.exports = function(app) {
     }
 
     users.find({query: {username: Student.username, role: 'STUDENT'}}).then((result) => {
-      if (!result.length) {
+      if (!result.data.length) {
         users.create(Student).then((result) => {
           if (result) {
             res.json({code: 201});

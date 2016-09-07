@@ -7,7 +7,11 @@ module.exports = function() {
   const app = this;
 
   const options = {
-    Model: Course
+    Model: Course,
+    paginate: {
+      default: 5,
+      max: 2000
+    }
   };
 
   app.use('/api/courses', service(options));

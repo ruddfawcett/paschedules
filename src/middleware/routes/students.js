@@ -7,15 +7,15 @@ module.exports = function(app) {
 
   router.get('/:username', (req, res, next) => {
     users.find({ query: { username: req.params.username, verified: true, role: 'STUDENT' } }).then((students) => {
-      if (!students.length) { next(errors.NotFoundStudent); }
+      if (!students.data.length) { next(errors.NotFoundStudent); }
       else {
-        var student = students[0];
+        var student = students.data[0];
         sections.find({ query: { students: student }}).then((sections) => {
-          if (!sections.length) { next(errors.NotFound); }
+          if (!sections.data.length) { next(errors.NotFound); }
           else {
             var periodZero = [];
             var theSections = [];
-            sections.forEach((section) => {
+            sections.data.forEach((section) => {
               if (section.period === 0) {
                 periodZero.push(section);
               }

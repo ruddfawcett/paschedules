@@ -9,10 +9,10 @@ module.exports = function(app) {
   // Renders a singular course view...
   router.get('/:slug', (req, res, next) => {
     courses.find({ query: { slug: req.params.slug}}).then((courses) => {
-      if (!courses.length) { next(errors.NotFound); }
+      if (!courses.data.length) { next(errors.NotFound); }
       else {
         var sections = [];
-        courses.forEach((course) => {
+        courses.data.forEach((course) => {
           course.sections.forEach((section) => {
             sections.push({
               teacher: section.teacher,
@@ -24,7 +24,7 @@ module.exports = function(app) {
           });
         });
         res.render('course', {
-          course: courses[0],
+          course: courses.data[0],
           sections: sections
         });
       }
@@ -36,15 +36,15 @@ module.exports = function(app) {
   router.get('/:slug/:section', (req, res, next) => {
     var sectionNumber = parseInt(req.params.section);
     courses.find({ query: { slug: req.params.slug}}).then((courses) => {
-      if (!courses.length) { next(errors.NotFound); }
+      if (!courses.data.length) { next(errors.NotFound); }
       else {
         var result = false;
-        async.each(courses[0].sections, (section) => {
+        async.each(courses.data[0].sections, (section) => {
           section.period = addSufix(section.period) + ' Period';
           if (section.number == sectionNumber) {
           result = true;
             return res.render('section', {
-              course: courses[0],
+              course: courses.data[0],
               section: section
             });
           }
