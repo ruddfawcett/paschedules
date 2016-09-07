@@ -49,9 +49,9 @@ module.exports = function(app) {
             });
           }
         });
-        if (!result) {
-          return res.render('error', {error: errors.NotFound});
-        }
+      }
+      if (!result) {
+        return res.render('error', {error: errors.NotFound});
       }
     }).catch((error) => {
       next(error);
