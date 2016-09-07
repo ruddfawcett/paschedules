@@ -7,10 +7,7 @@ module.exports = function() {
   const app = this;
 
   const options = {
-    Model: Course,
-    paginate: {
-      default: 5,
-      max: 25
+    Model: Course
     }
   };
 

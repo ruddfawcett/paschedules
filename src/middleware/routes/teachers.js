@@ -7,15 +7,15 @@ module.exports = function(app) {
 
   router.get('/:user_id', (req, res, next) => {
     users.find({ query: { _id: req.params.user_id, role: 'TEACHER' } }).then((teacher) => {
-      if (!teacher.data.length) { next(errors.NotFound); }
+      if (!teacher.length) { next(errors.NotFound); }
       else {
-        teacher = teacher.data[0];
+        teacher = teacher[0];
         sections.find({ query: { teacher: teacher._id }}).then((sections) => {
-          if (!sections.data.length) { next(errors.NotFound); }
+          if (!sections.length) { next(errors.NotFound); }
           else {
             res.render('teacher', {
               teacher: teacher,
-              sections: sections.data
+              sections: sections
             });
           }
         });

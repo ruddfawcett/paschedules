@@ -7,11 +7,7 @@ module.exports = function() {
   const app = this;
 
   const options = {
-    Model: Section,
-    paginate: {
-      default: 15,
-      max: 25
-    }
+    Model: Section
   };
 
   var assignPeriod = (options) => {

@@ -6,11 +6,7 @@ module.exports = function() {
   const app = this;
 
   const options = {
-    Model: User,
-    paginate: {
-      default: 5,
-      max: 25
-    }
+    Model: User
   };
 
   app.use('/api/users', service(options));

@@ -6,11 +6,7 @@ module.exports = function() {
   const app = this;
 
   const options = {
-    Model: Token,
-    paginate: {
-      default: 5,
-      max: 25
-    }
+    Model: Token
   };
 
   app.use('/api/tokens', service(options));

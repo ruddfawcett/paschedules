@@ -14,18 +14,18 @@ var self = module.exports = {
       async.each(items, (item) => {
         courses.find({ query: {code: item.course.code}}).then((results) => {
           var P = Q.defer();
-          if (!results.data.length) {
+          if (!results.length) {
             P.resolve(courses.create(item.course));
           }
           else {
-            P.resolve(results.data[0]);
+            P.resolve(results[0]);
           }
 
           return P.promise;
         }).then((course) => {
           var P = Q.defer();
           sections.find({query: {code: item.section.code}}).then((results) => {
-            if (!results.data.length) {
+            if (!results.length) {
               item.section.course = course._id;
               sections.create(item.section).then((section) => {
                 courses.update(course._id, {$addToSet: {sections: section._id}}).then((course) => {
@@ -34,7 +34,7 @@ var self = module.exports = {
               }).catch(self.error);
             }
             else {
-              var section = results.data[0];
+              var section = results[0];
               courses.update(course._id, {$addToSet: {sections: section._id}}).then((course) => {
                 P.resolve(section);
               }).catch(self.error);
@@ -44,7 +44,7 @@ var self = module.exports = {
           }).then((section) => {
             var P = Q.defer();
             users.find({query: item.teacher}).then((results) => {
-              if (!results.data.length) {
+              if (!results.length) {
                 users.create(item.teacher).then((teacher) => {
                   sections.update(section._id, {$set: {teacher: teacher._id}}).then((result) => {
                     P.resolve(section);
@@ -52,7 +52,7 @@ var self = module.exports = {
                 }).catch(self.error);
               }
               else {
-                var teacher = results.data[0];
+                var teacher = results[0];
                 sections.update(section._id, {$set: {teacher: teacher._id}}).then(() => {
                   P.resolve(section);
                 });

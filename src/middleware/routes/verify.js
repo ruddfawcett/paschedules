@@ -8,7 +8,7 @@ module.exports = function(app) {
   router.get('/:token_id', (req, res, next) => {
     if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
     tokens.find({ query: {_id: req.params.token_id, valid: true}}).then((result) => {
-      if (!result.data.length) {
+      if (!result.length) {
         return res.render('error', {error: errors.NotFoundToken});
       }
       else {
