@@ -9,7 +9,7 @@ module.exports = function(app) {
   const tokens = app.service('/api/tokens');
 
   router.get('/periods/refresh', (req, res, next) => {
-    if (!req.isAuthenticated() || req.user.role !== 'GOD') {return res.redirect('/');}
+    if (!req.isAuthenticated() || req.user.username !== 'rfawcett') {return res.redirect('/');}
 
     reperiod.work(app, function() {
       return res.json({result: 'success'});
@@ -17,7 +17,7 @@ module.exports = function(app) {
   });
 
   router.get('/stats', (req, res, next) => {
-    if (!req.isAuthenticated() || req.user.role !== 'GOD') {return res.redirect('/');}
+    if (!req.isAuthenticated() || req.user.username !== 'rfawcett') {return res.redirect('/');}
 
     var total = 1131;
 
