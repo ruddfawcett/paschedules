@@ -8,7 +8,7 @@ module.exports = function() {
   const options = {
     Model: User,
     paginate: {
-      default: 5,
+      default: 2000,
       max: 2000
     }
   };

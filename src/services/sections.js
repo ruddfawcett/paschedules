@@ -9,7 +9,7 @@ module.exports = function() {
   const options = {
     Model: Section,
     paginate: {
-      default: 15,
+      default: 2000,
       max: 2000
     }
   };

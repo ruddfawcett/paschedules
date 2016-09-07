@@ -9,7 +9,7 @@ module.exports = function() {
   const options = {
     Model: Course,
     paginate: {
-      default: 5,
+      default: 2000,
       max: 2000
     }
   };
