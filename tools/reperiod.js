@@ -24,23 +24,29 @@ module.exports = {
     function load() {
       var P = Q.defer();
       sections.find().then((results) => {
-        P.resolve(results);
+        console.log(`Loaded ${results.data.length} sections`);
+        P.resolve(results.data);
       });
       return P.promise;
     }
 
     function findPeriod(section) {
       var P = Q.defer();
-      section.meets.forEach(function(meeting) {
-        if (meeting.day == 3 || meeting.day == 4) {
-          return;
-        }
-        else {
-          P.resolve({
+      async.forEach(section.meets, (meeting, callback) => {
+        if (meeting.day !== 3 && meeting.day !== 4) {
+          callback({
             section: section,
             period: timeToPeriod(meeting.start)
           });
         }
+        else {
+          callback({
+            section: section,
+            period: 0
+          });
+        }
+      }, function(result) {
+        P.resolve(result);
       });
       return P.promise;
     }
@@ -48,18 +54,19 @@ module.exports = {
     function setPeriod(data) {
       var P = Q.defer();
       sections.update(data.section._id, {$set:{period: data.period}}).then((result) => {
-        P.resolve();
-      });
+        P.resolve(result);
+      })
       return P.promise;
     }
 
     function fix(sections) {
+      var P = Q.defer();
       async.forEach(sections, (section, callback) => {
         findPeriod(section).then(setPeriod).then(function() {
           callback();
         });
-      }, function(err) {
-        P.resolve();
+      }, function() {
+        P.resolve(sections.length);
       });
       return P.promise;
     }

@@ -11,8 +11,8 @@ module.exports = function(app) {
   router.get('/periods/refresh', (req, res, next) => {
     if (!req.isAuthenticated() || req.user.username !== 'rfawcett') {return res.redirect('/');}
 
-    reperiod.work(app, function() {
-      return res.json({result: 'success'});
+    reperiod.work(app, function(total) {
+      return res.json({result: 'success', updated: total});
     });
   });
 
