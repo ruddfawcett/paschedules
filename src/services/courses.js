@@ -8,7 +8,6 @@ module.exports = function() {
 
   const options = {
     Model: Course
-    }
   };
 
   app.use('/api/courses', service(options));

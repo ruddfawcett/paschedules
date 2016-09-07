@@ -2,7 +2,7 @@ const async = require('async');
 const Q = require('q');
 
 module.exports = {
-  work: function(app) {
+  work: function(app, cb) {
     const sections = app.service('/api/sections');
 
     var timeToPeriod = (start) => {
@@ -64,8 +64,6 @@ module.exports = {
       return P.promise;
     }
 
-    load().then(fix).then(function() {
-      console.log('Done.');
-    });
+    load().then(fix).then(cb);
   }
 }
