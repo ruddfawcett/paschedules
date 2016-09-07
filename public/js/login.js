@@ -1,5 +1,5 @@
 $(function() {
-  $('.button').bind('click touchstart', fuction() {
+  $('.button').bind('click touchstart', function() {
     var credentials = {
       username: $('.username').val().trim().toLowerCase(),
       password: $('.password').val().trim()
