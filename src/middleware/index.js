@@ -7,6 +7,7 @@ const teachers = require('./routes/teachers');
 const courses = require('./routes/courses');
 const verify = require('./routes/verify');
 const onboarding = require('./routes/onboarding');
+const search = require('./routes/search');
 
 module.exports = function() {
   const app = this;
@@ -29,6 +30,7 @@ module.exports = function() {
   app.use('/students', students(app));
   app.use('/teachers', teachers(app));
   app.use('/courses', courses(app));
+  app.use('/search', search(app));
 
   app.get('/demo/ical', (req, res) => {
     res.send(require('fs').readFileSync('/Users/ruddfawcett/GitHub/timetable/specs/example.ics', 'utf8'));
