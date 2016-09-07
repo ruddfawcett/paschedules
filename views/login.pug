@@ -11,7 +11,7 @@ block form
   //- form(action='/login', method='post')
   input(type='text', class='username', name='username', placeholder='PAnet Username')
   input(type='password', class='password', name='password', placeholder='Password')
-  input(type='submit', class='button', value='Login')
+  input(type='submit', class='button', value='Login', disabled='true')
   img(class='loading', src='/static/assets/images/loading.svg')
   p(class='message')
   - if (!verify)
