@@ -22,16 +22,16 @@ module.exports = function(app) {
     var total = 1131;
 
     users.find({query: {role: 'STUDENT'}}).then((registered) => {
-      var rPercent = ((registered.data.length + 1) / total) * 100;
+      var rPercent = ((registered.data.length) / total) * 100;
       users.find({query: {role: 'STUDENT', verified: true}}).then((verified) => {
-        var vPercent = ((verified.data.length + 1) / total) * 100;
+        var vPercent = ((verified.data.length) / total) * 100;
         return res.json({
           registered: {
-            total: registered.data.length + 1,
+            total: registered.data.length,
             percentage: `${rPercent}`
           },
           verified: {
-            total: verified.data.length + 1,
+            total: verified.data.length,
             percentage: `${vPercent}`
           }
         });
