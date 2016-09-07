@@ -14,7 +14,7 @@ module.exports = function() {
     }
   };
 
-  var assignPeriod = (options) => {
+  const assignPeriod = (options) => {
     var timeToPeriod = (start) => {
       var h = start.getHours();
       if (h == 8) {
