@@ -1,6 +1,6 @@
 {
   "host": "paschedul.es",
   "port": 80,
-  "mongodb": "mongodb://rfawcett:0013F7B5EEC8!@candidate.40.mongolayer.com:11473,candidate.64.mongolayer.com:10864/app55875371",
+  "mongodb": "MONGOHQ_URL",
   "public": "../public/"
 }

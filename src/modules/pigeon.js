@@ -7,7 +7,7 @@ var transporter = nodemailer.createTransport( {
     service:  'Mailgun',
     auth: {
      user: 'noreply@paschedul.es',
-     pass: '*n0R3ply1@!'
+     pass: process.env.EMAIL_PASSWORD
     }
 });
 
