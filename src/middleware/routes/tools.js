@@ -9,8 +9,10 @@ module.exports = function(app) {
   router.get('/periods/refresh', (req, res, next) => {
     if (!req.isAuthenticated() || req.user.username !== 'rfawcett') {return res.redirect('/');}
 
-    reperiod.work(app, function(total) {
+    reperiod.work(app).then((total) => {
       return res.json({result: 'success', updated: total});
+    }).catch((error) => {
+      return res.json({ error: error });
     });
   });
 
@@ -19,7 +21,7 @@ module.exports = function(app) {
 
     stats.countStudents(app).then(stats.countTeachers).then(stats.countCourses).then(stats.countSections).then((result) => {
       return res.json(result);
-    })
+    });
   });
 
   return router;

@@ -2,7 +2,7 @@ const async = require('async');
 const Q = require('q');
 
 module.exports = {
-  work: function(app, cb) {
+  work: function(app) {
     const sections = app.service('/api/sections');
 
     var timeToPeriod = (start) => {
@@ -22,10 +22,13 @@ module.exports = {
     }
 
     function load() {
+      console.log('test');
       var P = Q.defer();
       sections.find().then((results) => {
         console.log(`Loaded ${results.data.length} sections`);
         P.resolve(results.data);
+      }).catch((error) => {
+        P.reject(error);
       });
       return P.promise;
     }
@@ -55,7 +58,9 @@ module.exports = {
       var P = Q.defer();
       sections.update(data.section._id, {$set:{period: data.period}}).then((result) => {
         P.resolve(result);
-      })
+      }).catch((error) => {
+        P.reject(error);
+      });
       return P.promise;
     }
 
@@ -71,6 +76,6 @@ module.exports = {
       return P.promise;
     }
 
-    load().then(fix).then(cb);
+    return load().then(fix);
   }
 }
