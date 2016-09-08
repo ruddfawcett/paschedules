@@ -22,7 +22,7 @@ $(function() {
     }
     else {
       if (!ical.val().startsWith('https://unify-ext.andover.edu/extranet/Student/OpenCalendar')) {
-        $('.message').text('Your iCal URL looks incorrect, try again?').fadeIn().delay(2000).fadeOut();
+        $('.message').text('Your iCal URL or class year looks incorrect, try again?').fadeIn().delay(2000).fadeOut();
         return;
       }
 

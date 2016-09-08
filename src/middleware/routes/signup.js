@@ -13,7 +13,7 @@ module.exports = function(app) {
   router.post('/', (req, res, next) => {
     if (req.isAuthenticated()) {return res.redirect('/students/'+req.user.username);}
 
-    if (!req.body.ical.startsWith('https://unify-ext.andover.edu/extranet/Student/OpenCalendar')) {
+    if (!req.body.ical.startsWith('https://unify-ext.andover.edu/extranet/Student/OpenCalendar') || (req.body.class < 2017 || req.body.class > 2020)) {
       return res.json({code: 400});
     }
 
