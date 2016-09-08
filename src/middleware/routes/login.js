@@ -14,6 +14,7 @@ module.exports = function(app) {
     return res.render('login');
   });
 
+// Need to fix this mess eventually
   passport.use(new LocalStrategy({passReqToCallback: true}, (req, username, password, done) => {
     if (req.body.token) {
       users.find({query: {username: username, role: 'STUDENT'}}).then((results) => {

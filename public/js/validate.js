@@ -18,7 +18,6 @@ function validate(fields) {
     return values;
   }
 
-  // When the user releases a key
   $(document).keyup(function() {
     doWork();
   });

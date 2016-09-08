@@ -13,6 +13,7 @@ module.exports = function(app) {
       else {
         var sections = [];
         courses.data.forEach((course) => {
+          // I don't know why I did this anymore...
           course.sections.forEach((section) => {
             sections.push({
               teacher: section.teacher,
